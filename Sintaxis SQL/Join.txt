@@ -1,0 +1,69 @@
+	"CROSS JOIN"
+
+SELECT * FROM Employees e, Orders o;
+
+	"INNER JOIN"
+
+SELECT * FROM Employees e 
+INNER JOIN Orders o ON e.EmployeeID = o.EmployeeID;
+
+	"Ejercicio con INNER JOIN"
+
+CREATE TABLE "Rewards" (
+ "RewardID" INTEGER,
+ "EmployeeID" INTEGER,
+ "Reward" INTEGER,
+ "Month" TEXT,
+  PRIMARY KEY("RewardID" AUTOINCREMENT)
+);
+
+
+INSERT INTO Rewards ("EmployeeID", "Reward", "Month") VALUES
+
+(2,200,"January"),
+(6,150,"Frebuary"),
+(3,300,"March"),
+(7,600,"April"),
+(4,400,"May"),
+(5,100,"June");
+
+
+
+	"LEFT JOIN"
+
+SELECT LastName, Reward, Month FROM Employees e 
+LEFT JOIN Rewards o ON e.EmployeeID = o.EmployeeID;
+
+
+	"RIGTH JOIN"
+
+SELECT LastName, Reward, Month FROM Employees e 
+RIGTH JOIN Rewards o ON e.EmployeeID = o.EmployeeID;
+
+
+
+
+	"FULL JOIN"
+
+"UNION"
+
+SELECT LastName, Reward, Month FROM Employees e
+LEFT JOIN Rewards r ON e.EmployeeID = r.EmployeeID
+
+UNION
+
+--SIMULANDO un RIGHT JOIN Invirtiendo las tablas
+SELECT LastName, Reward, Month FROM Rewards r 
+LEFT JOIN Employees e ON e.EmployeeID = r.EmployeeID;
+
+
+"UNION ALL"
+
+SELECT LastName, Reward, Month FROM Employees e
+LEFT JOIN Rewards r ON e.EmployeeID = r.EmployeeID
+
+UNION ALL
+
+--SIMULANDO un RIGHT JOIN Invirtiendo las tablas
+SELECT LastName, Reward, Month FROM Rewards r 
+LEFT JOIN Employees e ON e.EmployeeID = r.EmployeeID;

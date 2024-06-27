@@ -1,0 +1,125 @@
+	"Cambiar nombre de campo solo en la consulta"
+SELECT LastName As apellido FROM Employees;
+
+	"Ascendente"
+SELECT * FROM Employees
+ORDER BY LastName ASC;
+
+	"Descendente"
+SELECT * FROM Employees
+ORDER BY LastName DESC;
+
+
+	"DISTINCT Eliminar registros duplicados para mostrarlos en la consulta"
+SELECT DISTINCT ProductName 
+FROM Products ORDER BY RANDOM()
+
+
+	"Uso de WHERE"
+SELECT * FROM medical_shifts WHERE id_user = 3;
+
+UPDATE medical_shifts 
+SET reason = "Tos", schedule = "8:00AM"
+WHERE id_shift = 3;
+
+DELETE FROM medical_shifts WHERE id_shift = 2;
+
+SELECT * FROM medical_shifts;
+
+
+
+	"Uso de AND, OR, NOT"
+
+"AND"
+SELECT * FROM Products
+WHERE ProductID >= 20 AND ProductID <= 50;
+
+"OR"
+SELECT * FROM Products
+WHERE ProductName = "Inlagd Sill" OR ProductName = "Steeleye Stout";
+
+SELECT * FROM Products
+WHERE (Price < 20 OR CategoryID = 6) AND SupplierID = 7;
+
+
+"NOT"
+SELECT * FROM Products
+WHERE NOT price < 40;
+
+SELECT * FROM Customers
+WHERE NOT Country = "USA";
+
+SELECT * FROM Customers
+WHERE NOT Country = "USA" AND NOT Country = "France";
+
+
+SELECT * FROM Customers
+WHERE CustomerID > 50
+AND NOT Country = "UK"
+AND NOT Country = "USA"
+AND NOT Country = "Germany"
+AND NOT Country = "Argentina"
+AND NOT Country = "Poland"
+LIMIT 5;
+
+
+
+SELECT * FROM Products
+WHERE NOT ProductID = 6
+AND NOT SupplierID = 1
+AND Price < 30
+ORDER BY RANDOM()
+LIMIT 6
+
+
+	"BETWEEN"
+SELECT * FROM Products
+WHERE Price BETWEEN 20 AND 40
+
+SELECT * FROM Products
+WHERE Price BETWEEN 20 AND 40
+AND CategoryID = 6
+
+SELECT * FROM Products
+WHERE Price NOT BETWEEN 20 AND 40
+AND CategoryID = 6
+
+
+
+	"LIKE"
+
+SELECT * FROM Employees WHERE LastName LIKE "Fuller";
+
+	"LIKE %"
+
+SELECT * FROM Employees WHERE LastName LIKE "f%";
+SELECT * FROM Employees WHERE LastName LIKE "%r";
+SELECT * FROM Employees WHERE LastName LIKE "%l%";
+SELECT * FROM Employees WHERE LastName LIKE "full%";
+
+	"LIKE _"
+
+SELECT * FROM Employees WHERE LastName LIKE "f_____";
+SELECT * FROM Employees WHERE LastName LIKE "_____r";
+SELECT * FROM Employees WHERE LastName LIKE "___l__";
+
+	"LIKE %,_"
+
+SELECT * FROM Employees WHERE LastName LIKE "f___%";
+SELECT * FROM Employees WHERE LastName LIKE "%___r";
+SELECT * FROM Employees WHERE LastName LIKE "%__l_%";
+
+
+	"IS NULL - IS NOT NULL"
+
+SELECT * FROM Products WHERE ProductName IS NOT NULL;
+SELECT * FROM Products WHERE ProductName IS NULL;
+
+
+
+
+
+	"Operador IN"
+
+SELECT * FROM Products 
+WHERE SupplierID IN (3,4,6,7);

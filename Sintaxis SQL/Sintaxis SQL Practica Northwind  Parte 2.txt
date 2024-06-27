@@ -1,0 +1,52 @@
+	"Funciones de Agrupacion"
+
+SELECT COUNT(firstname) AS total_name_employees FROM Employees;
+
+SELECT SUM(price) AS total_products FROM Products;
+
+SELECT AVG(Price) AS promedio FROM Products;
+
+SELECT ROUND(AVG(Price), 4) AS promedio FROM Products;
+
+SELECT MIN(Price) AS Valor FROM Products;
+SELECT ProductName, MIN(Price) AS Valor FROM Products
+WHERE ProductName IS NOT NULL;
+
+SELECT ProductName, MAX(Price) AS Valor FROM Products;
+
+
+
+
+
+
+
+	"GROUP BY - HAVING"
+*GROUP:
+
+SELECT CategoryID,ROUND(AVG(Price)) AS promedio FROM Products
+WHERE CategoryID IS NOT NULL
+GROUP BY CategoryID;
+
+
+*HAVING:
+
+SELECT SupplierID,ROUND(AVG(Price)) AS promedio FROM Products
+WHERE ProductName IS NOT NULL
+GROUP BY SupplierID
+HAVING promedio > 40;
+
+
+"Consulta hecha por mi"
+
+SELECT ProductID,SUM(Quantity) AS Producto_mas_vendido FROM OrderDetails
+GROUP BY ProductID
+ORDER BY Producto_mas_vendido DESC
+LIMIT 1;
+
+
+"Practica del Curso"
+
+SELECT ProductID,SUM(Quantity) AS Producto_mas_vendido FROM OrderDetails
+GROUP BY ProductID
+HAVING Producto_mas_vendido < 50
+ORDER BY Producto_mas_vendido 

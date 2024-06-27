@@ -1,0 +1,15 @@
+	"Ejercicio de Subconsultas relacionando 3 tablas"
+
+SELECT FirstName, LastName,
+	(
+	  SELECT SUM(od.Quantity) FROM [Orders] o, [OrderDetails] od 
+	  WHERE o.EmployeeID = e.EmployeeID AND o.OrderID = od.OrderID
+	) AS Quantity_total
+FROM [Employees] e
+
+WHERE Quantity_total > (SELECT AVG(Quantity_total) FROM (
+
+SELECT (SELECT SUM(od.Quantity) FROM [Orders] o, [OrderDetails] od 
+	  WHERE o.EmployeeID = e2.EmployeeID AND o.OrderID = od.OrderID) AS Quantity_total FROM [Employees] e2
+GROUP BY e2.EmployeeID	  
+))

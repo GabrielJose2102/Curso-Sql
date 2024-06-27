@@ -1,0 +1,71 @@
+CREATE DATABASE usuarios;
+
+USE usuarios;
+
+CREATE TABLE "users" (
+ "nombre" TEXT,
+ "apellido TEXT,
+ "edad"	INTEGER
+);
+
+
+SELECT * FROM users;
+
+
+CREATE TABLE "users" (
+ "id_usuario" INTEGER,
+ "name"	TEXT,
+ "lastname" TEXT,
+ "age"	INTEGER,
+  PRIMARY KEY("id_usuario" AUTOINCREMENT)
+);
+
+
+INSERT INTO users (name,lastname,age)
+VALUES ('Elvis','Torrealba','16')
+	('Gabriel','Torrealba','23')
+	('Orlando','Torrealba','52')
+	('Wilkerman','Torrealba','22');
+
+
+SELECT name FROM users;
+SELECT lastname FROM users;
+SELECT age FROM users;
+
+
+DELETE FROM users;
+
+
+CREATE TABLE "medical_shifts" (
+  "id_shift" INTEGER,
+  "professionals" TEXT,
+  "id_user" INTEGER,
+  "reason" TEXT,
+  "schedule" TEXT,
+   PRIMARY KEY("id_shift" AUTOINCREMENT)
+);
+
+
+INSERT INTO medical_shifts (professionals,id_user,reason,schedule)
+VALUES ('Dr Williams',2,'Gripe','8:00AM'),
+	('Dr Suarez',4,'Tos','1:00PM'),
+	('Dr Perez',3,'Fiebre','6:00AM'),
+	('Dr Caceres',1,'Dolor En la Muñeca','11:00AM');
+	
+
+SELECT * FROM medical_shifts;
+
+
+
+	"Uso de WHERE"
+
+SELECT * FROM medical_shifts WHERE id_user = 3;
+
+UPDATE medical_shifts 
+SET reason = "Tos", schedule = "8:00AM"
+WHERE id_shift = 3;
+
+DELETE FROM medical_shifts WHERE id_shift = 2;
+
+SELECT * FROM medical_shifts;
+

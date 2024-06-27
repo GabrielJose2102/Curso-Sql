@@ -1,0 +1,28 @@
+		"Transacciones"
+
+BEGIN
+
+ROLLBACK
+
+COMMIT
+
+
+SELECT * FROM Products;
+
+
+
+BEGIN;
+
+UPDATE Products SET ProductName = "Tazon" WHERE ProductName = "Chais";
+
+
+ROLLBACK;
+
+
+
+BEGIN;
+
+UPDATE Products SET ProductName = "Tazon" WHERE ProductName = "Chais";
+
+
+COMMIT;

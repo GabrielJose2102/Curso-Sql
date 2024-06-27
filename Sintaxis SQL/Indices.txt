@@ -1,0 +1,27 @@
+
+		"Indices"
+
+CREATE INDEX name ON Products (ProductName);
+
+
+
+		"Indice compuesto"
+
+CREATE UNIQUE INDEX name2 ON Employees (FirstName,LastName)
+
+
+		"Mejora de rendimiento de consulta"
+
+CREATE INDEX ind_OrdersDetails_Quantity ON OrderDetails (Quantity);
+CREATE INDEX ind_Orders_OrderDate ON Orders (OrderDate);
+
+
+DROP INDEX ind_OrdersDetails_Quantity;
+DROP INDEX ind_Orders_OrderDate
+
+SELECT * FROM OrderDetails od
+INNER JOIN Orders o
+WHERE OrderDate > "1996-07-04"
+AND od.Quantity > 10
+
+6.24.25

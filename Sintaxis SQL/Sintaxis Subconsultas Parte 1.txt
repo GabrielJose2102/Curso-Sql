@@ -1,0 +1,94 @@
+	"Subconsultas"
+
+SELECT ProductID, 
+	Quantity,
+		(SELECT ProductName FROM Products 
+		 WHERE OrderDetails.ProductID = ProductID)
+FROM OrderDetails;
+
+
+
+SELECT ProductID,
+		(SELECT ProductName FROM Products 
+		 WHERE OrderDetails.ProductID = ProductID) AS Name,
+		Quantity,
+		(SELECT Price FROM Products 
+ 		 WHERE OrderDetails.ProductID = ProductID) AS Price$
+FROM OrderDetails;
+
+
+
+SELECT ProductID, 
+		(SELECT ProductName FROM Products 
+		 WHERE ProductID = OD.ProductID) AS name,
+		 SUM(Quantity) AS Total,
+		 (SELECT Price FROM Products 
+		  WHERE ProductID = OD.ProductID) AS Price,
+		 ROUND(SUM(Quantity) * (SELECT Price FROM Products 
+		  WHERE ProductID = OD.ProductID)) AS Total_sale
+FROM [OrderDetails] OD
+GROUP BY ProductID
+ORDER BY Total_sale DESC;
+
+	"Subconsulta con condicion WHERE"
+
+SELECT ProductID, 
+		(SELECT ProductName FROM Products WHERE ProductID = OD.ProductID) AS name,
+		 SUM(Quantity) AS Total,
+		 (SELECT Price FROM Products WHERE ProductID = OD.ProductID) AS Price,
+		 ROUND(SUM(Quantity) * (SELECT Price FROM Products WHERE ProductID = OD.ProductID)) AS Total_sale
+FROM [OrderDetails] OD
+WHERE Price > 40
+GROUP BY ProductID
+ORDER BY Total_sale DESC;
+
+
+	"Otra Forma de consultar donde no se muestra el campo precio"
+
+SELECT ProductID, 
+		(SELECT ProductName FROM Products WHERE ProductID = OD.ProductID) AS name,
+		 SUM(Quantity) AS Total,
+		 ROUND(SUM(Quantity) * (SELECT Price FROM Products WHERE ProductID = OD.ProductID)) AS Total_sale
+FROM [OrderDetails] OD
+WHERE (SELECT Price FROM Products WHERE ProductID = OD.ProductID) > 40
+GROUP BY ProductID
+ORDER BY Total_sale DESC;
+
+
+
+	"Seleccionando solo el nombre de la subconsulta"
+
+SELECT name FROM (SELECT ProductID, 
+		(SELECT ProductName FROM Products WHERE ProductID = OD.ProductID) AS name,
+		 SUM(Quantity) AS Total,
+		 ROUND(SUM(Quantity) * (SELECT Price FROM Products WHERE ProductID = OD.ProductID)) AS Total_sale
+FROM [OrderDetails] OD
+WHERE (SELECT Price FROM Products WHERE ProductID = OD.ProductID) > 40
+GROUP BY ProductID
+ORDER BY Total_sale DESC
+);
+
+
+
+
+	"Consulta Propia"
+
+SELECT OrderDetailID, ProductID, 
+		(SELECT ProductName FROM Products 
+		 WHERE ProductID = OD.ProductID) AS Product_name,
+		(SELECT Price FROM Products 
+		 WHERE ProductID = OD.ProductID) AS Price$,
+		SUM((SELECT Price FROM Products 
+		 WHERE ProductID = OD.ProductID)) AS Sale_total,
+		Quantity,
+		OrderID,
+		(SELECT EmployeeID FROM Orders 
+WHERE OrderID = OD.OrderID) AS ID_Employees
+FROM [OrderDetails] OD
+GROUP BY ID_Employees
+ORDER BY Sale_total ASC;
+
+
+
+	"Ejercicio de Consultas"
+
